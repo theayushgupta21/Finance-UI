@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4F46E5; /* Indigo 600 */
+  --color-primary-hover: #4338CA;
+  --color-bg-light: #F9FAFB; /* Slate 50 */
+  --color-border-light: #E5E7EB; /* Slate 200 */
+  
+  --font-inter: "Inter", sans-serif;
+  
+  --shadow-saas: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-saas-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--color-bg-light)] text-slate-900 font-[var(--font-inter)] antialiased;
+  }
+}
+
+@layer components {
+  .saas-card {
+    @apply bg-white border border-slate-200 rounded-xl shadow-[var(--shadow-saas)] transition-all duration-200 hover:shadow-[var(--shadow-saas-lg)];
+  }
+  
+  .saas-button-primary {
+    @apply bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium transition-colors hover:bg-indigo-700 active:bg-indigo-800 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .saas-button-secondary {
+    @apply bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-slate-50 active:bg-slate-100;
+  }
+
+  /* Transition for view changes */
+  .fade-enter {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+}
