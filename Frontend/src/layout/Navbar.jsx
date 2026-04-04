@@ -1,10 +1,13 @@
 import React from "react";
-import { User, Bell, Menu } from "lucide-react";
+import { User, Bell, Menu, Sun, Moon } from "lucide-react";
 import { useUIStore } from "../store/useUIStore";
+import { useThemeStore } from "../store/useThemeStore";
+
 
 export default function Navbar({ role, setRole }) {
 
     const toggleSidebar = useUIStore((state) => state.toggleSidebar);
+    const { theme, toggleTheme } = useThemeStore();
 
     return (
         <div className="w-full h-16 bg-white dark:bg-gray-900 border-b flex items-center justify-between px-6 shadow-sm">
@@ -25,6 +28,21 @@ export default function Navbar({ role, setRole }) {
             </div>
 
             {/* Right */}
+            <div className="flex items-center gap-4">
+
+                {/* 🌙 DARK MODE TOGGLE */}
+                <button
+                    onClick={toggleTheme}
+                    className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:scale-105 transition"
+                >
+                    {theme === "light" ? (
+                        <Moon size={18} className="text-gray-700" />
+                    ) : (
+                        <Sun size={18} className="text-yellow-400" />
+                    )}
+                </button>
+
+            </div>
             <div className="flex items-center gap-4">
 
                 <div className="relative">

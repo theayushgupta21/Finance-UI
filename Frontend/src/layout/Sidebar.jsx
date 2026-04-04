@@ -4,7 +4,7 @@ import {
     Receipt,
     BarChart3,
 } from "lucide-react";
-import { useUIStore } from "../../store/useUIStore";
+import { useUIStore } from "../store/useUIStore";
 
 export default function Sidebar({ active, setActive }) {
     const sidebarOpen = useUIStore((state) => state.sidebarOpen);

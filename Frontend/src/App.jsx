@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Layput.jsx/Sidebar";
+import React, { useState, useEffect } from "react";
+import Navbar from "./layout/Navbar";
+import Sidebar from "./layout/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
 import Insights from "./pages/Insights";
@@ -36,43 +36,40 @@ export default function App() {
     }
   }, [theme]);
 
-  return children;
-}
 
 
+  return (
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
 
-return (
-  <div className="flex h-screen">
+      {/* Sidebar */}
+      <Sidebar active={active} setActive={setActive} />
 
-    {/* Sidebar */}
-    <Sidebar active={active} setActive={setActive} />
+      <div className="flex-1 flex flex-col">
 
-    <div className="flex-1 flex flex-col">
+        {/* Navbar (Role Control) */}
+        <Navbar role={role} setRole={setRole} />
 
-      {/* Navbar (Role Control) */}
-      <Navbar role={role} setRole={setRole} />
+        {/* 🔥 Role Indicator (Nice UX) */}
+        <div className="px-6 py-2 bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-300 flex justify-between">
+          <span>
+            Current Role: <strong className="capitalize">{role}</strong>
+          </span>
 
-      {/* 🔥 Role Indicator (Nice UX) */}
-      <div className="px-6 py-2 bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-300 flex justify-between">
-        <span>
-          Current Role: <strong className="capitalize">{role}</strong>
-        </span>
+          {role === "viewer" && (
+            <span className="text-yellow-600">🔒 Read-only mode</span>
+          )}
 
-        {role === "viewer" && (
-          <span className="text-yellow-600">🔒 Read-only mode</span>
-        )}
+          {role === "admin" && (
+            <span className="text-green-600">🛠️ Full access enabled</span>
+          )}
+        </div>
 
-        {role === "admin" && (
-          <span className="text-green-600">🛠️ Full access enabled</span>
-        )}
+        {/* Page Content */}
+        <div className="flex-1 overflow-auto">
+          {renderPage()}
+        </div>
+
       </div>
-
-      {/* Page Content */}
-      <div className="flex-1 overflow-auto">
-        {renderPage()}
-      </div>
-
     </div>
-  </div>
-);
+  );
 }
